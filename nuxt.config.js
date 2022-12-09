@@ -69,7 +69,7 @@ export default {
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'https://gv.unocrm.mx/files/1669855106.png'
+        content: 'https://gamavision.com/logo.png'
       },
       {
         hid: 'og:image:secure_url',
