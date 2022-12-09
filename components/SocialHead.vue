@@ -55,7 +55,7 @@ export default {
           content: this.description
         },
         {
-          hid: 'og:image',
+          hid: 'og-image',
           property: 'og:image',
           content: this.image
         },
