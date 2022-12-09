@@ -17,7 +17,7 @@
 export default {
   async asyncData({ params }) {
     const post = await fetch(
-      `https://gv.unocrm.mx/api/v1/news?filter[slug]=${params.slug}`
+      `https://gv.unocrm.mx/api/v1/news?filter[slug]=el-detras-de-los-meses-sin-intereses-factibles-o-no`
     ).then((res) => res.json())
     return { post }
   },
