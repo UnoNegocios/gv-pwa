@@ -1,8 +1,8 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'My amazing Nuxt application',
-    titleTemplate: 'Nuxt | %s',
+    title: 'La televisión como siempre debió ser.',
+    titleTemplate: 'GAMAVISION | %s',
     meta: [
       { charset: 'utf-8' },
       {
@@ -13,7 +13,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'The amazing Nuxt application that teaches me all the cool features of Nuxt'
+          'GAMAVISION | La televisión como siempre debió ser.'
       },
 
       // Twitter
@@ -23,22 +23,22 @@ export default {
         name: 'twitter:card',
         content: 'summary_large_image'
       },
-      { hid: 'twitter:site', name: 'twitter:site', content: '@nuxt_js' },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@gamavisionmx' },
       {
         hid: 'twitter:url',
         name: 'twitter:url',
-        content: 'https://nuxtjs.org'
+        content: 'https://www.gamavision.com/'
       },
       {
         hid: 'twitter:title',
         name: 'twitter:title',
-        content: 'My amazing Nuxt application'
+        content: 'GAMAVISION'
       },
       {
         hid: 'twitter:description',
         name: 'twitter:description',
         content:
-          'The amazing Nuxt application that teaches me all the cool features of Nuxt'
+          'La televisión como siempre debió ser.'
       },
       {
         hid: 'twitter:image',
@@ -58,13 +58,13 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'My amazing Nuxt application'
+        content: 'GAMAVISION'
       },
       {
         hid: 'og:description',
         property: 'og:description',
         content:
-          'The amazing Nuxt application that teaches me all the cool features of Nuxt'
+          'La televisión como siempre debió ser.'
       },
       {
         hid: 'og:image',
@@ -79,7 +79,7 @@ export default {
       {
         hid: 'og:image:alt',
         property: 'og:image:alt',
-        content: 'NuxtJS'
+        content: 'GAMAVISION'
       }
     ],
     // canonical
@@ -87,7 +87,7 @@ export default {
       {
         hid: 'canonical',
         rel: 'canonical',
-        href: `https://nuxtjs.org/examples`
+        href: `https://www.gamavision.com/`
       }
     ]
   },
