@@ -63,7 +63,7 @@
       <div v-for="(p_c, index) in posts_by_categories.map(posts=>posts.data)" v-bind:key="index">
         <div class="flex justify-between mt-12 pt-2 pb-3" style="border-top:2px solid #d1d5db;">
           <h3 style="margin-top: -31px; height: 40px; text-transform: uppercase; font-size:24px; font-weight:500;" class="bg-indigo-600 text-zinc-50 font-semibold mr-2 px-8 py-0.5 rounded">{{categories[index].name}}</h3>
-          <a :href="'/' + categories[index].name">
+          <a :href="'/categorias/' + categories[index].name">
             <button  type="button" class="focus:ring-4 focus:outline-none rounded-lg px-4 py-1 text-center inline-flex items-center mb-2" style="font-size:12px; font-weight:700;background: rgb(79 70 229 / 10%); color: #4f46e5;">
               VER MÁS
               <svg class="w-3 h-3 ml3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
