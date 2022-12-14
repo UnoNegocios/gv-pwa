@@ -13,7 +13,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'GAMAVISION | La televisión como siempre debió ser.'
+          'La televisión como siempre debió ser.'
       },
 
       // Twitter
