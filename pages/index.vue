@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="posts!=undefined && categories!=undefined && posts_by_categories!=undefined && posts.data.length>0 && categories.length>0 && posts_by_categories.length>0 ">
     <NavBar/>
     <marquee style="background:black; padding:2px 30px 5px 30px;" class="top-space">
         <a :href="'/noticias/'+element.slug" v-for="(element, index) in posts.data" v-bind:key="index">
@@ -19,7 +19,7 @@
               <a :href="'/noticias/'+post.slug">
                 <div :style="'background-size: cover!important; background-position:center; background-blend-mode: multiply; background-color: rgba(0,0,0,0.35); height: 54ch; width: 85.6ch; background-image: url(' + post.featured_media_path + ');'">
                   <div style="position:absolute; bottom:0px; padding:65px 50px; text-align:left; width: 100%;">
-                    <p style="font-size:15px;" class="my-2 text-zinc-100 rounded-lg">{{dateFormat(post.created_at)}}<span style="font-size:12px;" class="ml-4 bg-indigo-600 text-zinc-50 font-semibold mr-2 px-2 py-0.5 rounded">{{ post.categories[0].name }}</span></p>
+                    <p style="font-size:15px;" class="my-2 text-zinc-100 rounded-lg">{{post.date}}<span style="font-size:12px;" class="ml-4 bg-indigo-600 text-zinc-50 font-semibold mr-2 px-2 py-0.5 rounded">{{ post.categories[0].name }}</span></p>
                     <h2  class="my-2 text-zinc-50	rounded-lg letra-banner-celular" style="font-size:35px; line-height:40px;">{{post.title}}</h2>
                   </div>
                 </div>
@@ -45,7 +45,7 @@
               <img :src="post.featured_media_path" />
               <span style="font-size:12px; margin:15px 15px 0px 15px;" class="bg-indigo-600 text-zinc-50 font-semibold mr-2 px-2.5 py-0.5 rounded">{{ post.categories[0].name }}</span>
 
-              <p style="font-size:12px; padding:0px 15px;" class="mb-2 mt-1 text-gray-500 rounded-lg">{{dateFormat(post.created_at)}}</p>
+              <p style="font-size:12px; padding:0px 15px;" class="mb-2 mt-1 text-gray-500 rounded-lg">{{post.date}}</p>
               <h4 style="line-height:19px; padding:0px 15px 15px 15px ; font-size:17px;">{{ post.title }}</h4>
             </a>
           </div>
@@ -53,7 +53,7 @@
       </div>
 
       
-      <agile v-if="banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
+      <agile v-if="banners!=undefined && banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>
@@ -73,28 +73,28 @@
         <div class="grid grid-cols-4 mb-12 pb-12 gap-4">
           <a class="col-span-2 md:col-span-1 post-style" v-if="p_c[0]!=undefined" :href="'/noticias/'+p_c[0].slug">
             <div class="height-160px" :style="'background-image:url(' + p_c[0].featured_media_path + '); background-repeat: no-repeat; background-size: cover;'"></div>
-            <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{dateFormat(p_c[0].created_at)}}</p>
+            <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{p_c[0].date}}</p>
             <h4 style="font-weight:600; line-height:22px; font-size:18px; padding:0px 15px 15px 15px">{{ p_c[0].title }}</h4>
           </a>
           <a class="col-span-2 md:col-span-1 post-style" v-if="p_c[1]!=undefined" :href="'/noticias/'+p_c[1].slug">
             <div class="height-160px" :style="'background-image:url(' + p_c[1].featured_media_path + '); background-repeat: no-repeat; background-size: cover;'"></div>
-            <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{dateFormat(p_c[1].created_at)}}</p>
+            <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{p_c[1].date}}</p>
             <h4 style="font-weight:600; line-height:22px; font-size:18px; padding:0px 15px 15px 15px">{{ p_c[1].title }}</h4>
           </a>
           <a class="col-span-2 md:col-span-1 post-style" v-if="p_c[2]!=undefined" :href="'/noticias/'+p_c[2].slug">
             <div class="height-160px" :style="'background-image:url(' + p_c[2].featured_media_path + '); background-repeat: no-repeat; background-size: cover;'"></div>
-            <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{dateFormat(p_c[2].created_at)}}</p>
+            <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{p_c[2].date}}</p>
             <h4 style="font-weight:600; line-height:22px; font-size:18px; padding:0px 15px 15px 15px">{{ p_c[2].title }}</h4>
           </a>
           <a class="col-span-2 md:col-span-1 post-style" v-if="p_c[3]!=undefined" :href="'/noticias/'+p_c[3].slug">
             <div class="height-160px" :style="'background-image:url(' + p_c[3].featured_media_path + '); background-repeat: no-repeat; background-size: cover;'"></div>
-            <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{dateFormat(p_c[3].created_at)}}</p>
+            <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{p_c[3].date}}</p>
             <h4 style="font-weight:600; line-height:22px; font-size:18px; padding:0px 15px 15px 15px">{{ p_c[3].title }}</h4>
           </a>
         </div>
       </div>
 
-      <agile v-if="banners2.length>0" autoplay :infinite="true" :autoplay-speed="4000">
+      <agile v-if="banners2!=undefined && banners2.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners2" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>
@@ -109,26 +109,31 @@
 export default {
   name: 'IndexPage',
   async asyncData() {
-    const banners = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3').then((response) =>
+    const banners = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3')
+    .then((response) =>
       response.json()
     );
 
-    const banners2 = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3').then((response) =>
+    const banners2 = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3')
+    .then((response) =>
       response.json()
     );
 
 
-    const posts = await fetch('https://gv.unocrm.mx/api/v1/news?filter[visibility->web]=true&itemsPerPage=7').then((response) =>
+    const posts = await fetch('https://gv.unocrm.mx/api/v1/news?filter[visibility->web]=true&itemsPerPage=7')
+    .then((response) =>
       response.json()
     );
 
-    const categories = await fetch('https://gv.unocrm.mx/api/v1/news/categories').then((response) =>
+    const categories = await fetch('https://gv.unocrm.mx/api/v1/news/categories')
+    .then((response) =>
       response.json()
     );
 
     var posts_by_categories = []
     for(var i=0; i<categories.length; i++){
-      posts_by_categories[i] = await fetch('https://gv.unocrm.mx/api/v1/news?filter[Categories.id]='+categories[i].id+'&filter[visibility->web]=true').then((response) =>//
+      posts_by_categories[i] = await fetch('https://gv.unocrm.mx/api/v1/news?filter[Categories.id]='+categories[i].id+'&filter[visibility->web]=true')
+      .then((response) =>
         response.json()
       );
     }
@@ -140,25 +145,6 @@ export default {
       fetch('https://gv.unocrm.mx/api/v1/click_ad/' + ad.id).then(response =>{
         window.open(ad.url, '_blank');
       });
-    },
-    dateFormat(date){
-        // Creamos el objeto fecha instanciándolo con la clase Date
-        const fecha = new Date(date.slice(0,10));
-        // Creamos array con los días de la semana
-        const dias_semana = ['Domingo', 'Lunes', 'martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-        //Creamos constante para el dia de hoy
-        const hoy = new Date(new Date().toLocaleString("sv-SE", {timeZone: "America/Monterrey"}).slice(0,10))
-        //sacamos diferencia
-        const difference = (Date.UTC(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()) - Date.UTC(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()))/(1000*60*60*24)
-        // Creamos array con los meses del año
-        const meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-        // Construimos el formato de salida
-        if(fecha.getUTCFullYear()!=new Date().getUTCFullYear()){
-            return dias_semana[fecha.getDay()] + ', ' + fecha.getDate() + ' de ' + meses[fecha.getMonth()];
-        }else{
-            return dias_semana[fecha.getDay()] + ', ' + fecha.getDate() + ' de ' + meses[fecha.getMonth()] + ' de ' + fecha.getUTCFullYear();
-        }
-        
     },
     column1Order(index){
       if(( ( index - 1 ) % 3 ) == 0){

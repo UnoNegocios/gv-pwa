@@ -15,7 +15,7 @@
       <div class="grid grid-cols-2  md:grid-cols-3 mb-12 pb-12 gap-3">
           <div class="md:col-span-2 col-span-2 md:mr-12 md:pr-12">
               <img class="ion-justify-content-start mb-2" :src="post.data[0].featured_media_path"/>
-              <span style="font-size:16px;">Publicado el <strong>{{dateFormat(post.data[0].created_at)}}</strong></span> por <strong>{{author}}</strong>
+              <span style="font-size:16px;">Publicado el <strong>{{ post.data[0].date }}</strong></span> <!--por <strong>{{author}}</strong-->
 
               <div class="htmlcontent my-6" v-html="htmlContent(post.data[0])"></div>
               <strong style="font-size:14px;">Siguenos en Redes Sociales:</strong>
@@ -34,7 +34,7 @@
                   </a>
               </div>
           </div>
-          <div class="md:col-span-1 col-span-2">
+          <div class="md:col-span-1 col-span-2" v-if="posts_by_category!=undefined && posts_by_category.data.length>0">
               <div class="pb-6 mt-6 md:mt-0">
                   <strong >Relacionado</strong>
               </div> 
@@ -56,7 +56,7 @@
                   <div v-if="index<posts_by_category.length-1" class="hidden justify-between mt-0 pt-0 pb-6 md:flex" style="border-top:1px solid #d1d5db;"></div>
               </div>
 
-              <agile v-if="banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
+              <agile v-if="banners!=undefined && banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
                 <div v-for="(banner, index) in banners" :key="index" class="slide">
                   <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
                 </div>
@@ -101,26 +101,6 @@ export default {
       fetch('https://gv.unocrm.mx/api/v1/click_ad/' + ad.id).then(response =>{
         window.open(ad.url, '_blank');
       });
-    },
-    dateFormat(date){
-      if(date!=undefined){
-        // Creamos el objeto fecha instanciándolo con la clase Date
-        const fecha = new Date(date.slice(0,10));
-        // Creamos array con los días de la semana
-        const dias_semana = ['Domingo', 'Lunes', 'martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-        //Creamos constante para el dia de hoy
-        const hoy = new Date(new Date().toLocaleString("sv-SE", {timeZone: "America/Monterrey"}).slice(0,10))
-        //sacamos diferencia
-        const difference = (Date.UTC(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()) - Date.UTC(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()))/(1000*60*60*24)
-        // Creamos array con los meses del año
-        const meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-        // Construimos el formato de salida
-        if(fecha.getUTCFullYear()!=new Date().getUTCFullYear()){
-            return dias_semana[fecha.getDay()] + ', ' + fecha.getDate() + ' de ' + meses[fecha.getMonth()];
-        }else{
-            return dias_semana[fecha.getDay()] + ', ' + fecha.getDate() + ' de ' + meses[fecha.getMonth()] + ' de ' + fecha.getUTCFullYear();
-        }
-      }
     },
   },
   head() {

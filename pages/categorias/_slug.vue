@@ -6,24 +6,24 @@
         <h3 style="margin-top: -31px; height: 40px; text-transform: uppercase; font-size:24px; font-weight:500;" class="bg-indigo-600 text-zinc-50 font-semibold mr-2 px-8 py-0.5 rounded">{{categoryName}}</h3>
       </div>
 
-      <agile v-if="banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
+      <agile v-if="banners!=undefined && banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>
       </agile>
       
-      <div class="grid grid-cols-4 mt-12 mb-12 gap-4">
+      <div v-if="posts!=undefined && posts.data.length>0" class="grid grid-cols-4 mt-12 mb-12 gap-4">
           <div v-for="(post, index) in posts.data" v-bind:key="index" class="text-align-center mb-4 mr-3 ml-3 md:col-span-1 col-span-2 post-style">
               <a :href="'/noticias/'+post.slug">
                   <div :style="'background-image:url(' + post.featured_media_path + '); background-repeat: no-repeat; background-size: cover; height:150px;'"></div>
-                  <p style="font-size:12px; padding:5px 15px;" class="mb-1 mt-1 text-gray-500 rounded-lg">{{dateFormat(post.created_at)}}</p>
+                  <p style="font-size:12px; padding:5px 15px;" class="mb-1 mt-1 text-gray-500 rounded-lg">{{ post.date }}</p>
                   <h4 style="font-weight:600; line-height:22px; font-size:18px; padding:0px 15px 0px 15px">{{ post.title }}</h4>
                   <p style="line-height:20px; font-size:14px; margin-top:5px; padding:0px 15px 15px 15px">{{ post.short_description }}</p>
               </a>
           </div>
       </div>
         
-      <agile v-if="banners2.length>0" autoplay :infinite="true" :autoplay-speed="4000">
+      <agile v-if="banners2!=undefined && banners2.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners2" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>
@@ -56,26 +56,6 @@ export default {
       fetch('https://gv.unocrm.mx/api/v1/click_ad/' + ad.id).then(response =>{
         window.open(ad.url, '_blank');
       });
-    },
-    dateFormat(date){
-      if(date!=undefined){
-        // Creamos el objeto fecha instanciándolo con la clase Date
-        const fecha = new Date(date.slice(0,10));
-        // Creamos array con los días de la semana
-        const dias_semana = ['Domingo', 'Lunes', 'martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-        //Creamos constante para el dia de hoy
-        const hoy = new Date(new Date().toLocaleString("sv-SE", {timeZone: "America/Monterrey"}).slice(0,10))
-        //sacamos diferencia
-        const difference = (Date.UTC(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()) - Date.UTC(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()))/(1000*60*60*24)
-        // Creamos array con los meses del año
-        const meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-        // Construimos el formato de salida
-        if(fecha.getUTCFullYear()!=new Date().getUTCFullYear()){
-            return dias_semana[fecha.getDay()] + ', ' + fecha.getDate() + ' de ' + meses[fecha.getMonth()];
-        }else{
-            return dias_semana[fecha.getDay()] + ', ' + fecha.getDate() + ' de ' + meses[fecha.getMonth()] + ' de ' + fecha.getUTCFullYear();
-        }
-      }
     },
   },
   computed:{
