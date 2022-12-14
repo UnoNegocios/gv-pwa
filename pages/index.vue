@@ -53,7 +53,7 @@
       </div>
 
       
-      <agile autoplay :infinite="true" :autoplay-speed="4000">
+      <agile v-if="banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>
@@ -94,7 +94,7 @@
         </div>
       </div>
 
-      <agile autoplay :infinite="true" :autoplay-speed="4000">
+      <agile v-if="banners2.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners2" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>

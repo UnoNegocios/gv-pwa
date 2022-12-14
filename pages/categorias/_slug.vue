@@ -6,7 +6,7 @@
         <h3 style="margin-top: -31px; height: 40px; text-transform: uppercase; font-size:24px; font-weight:500;" class="bg-indigo-600 text-zinc-50 font-semibold mr-2 px-8 py-0.5 rounded">{{categoryName}}</h3>
       </div>
 
-      <agile autoplay :infinite="true" :autoplay-speed="4000">
+      <agile v-if="banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>
@@ -23,7 +23,7 @@
           </div>
       </div>
         
-      <agile autoplay :infinite="true" :autoplay-speed="4000">
+      <agile v-if="banners2.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners2" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>

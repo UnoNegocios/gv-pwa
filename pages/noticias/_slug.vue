@@ -56,7 +56,7 @@
                   <div v-if="index<posts_by_category.length-1" class="hidden justify-between mt-0 pt-0 pb-6 md:flex" style="border-top:1px solid #d1d5db;"></div>
               </div>
 
-              <agile autoplay :infinite="true" :autoplay-speed="4000">
+              <agile v-if="banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
                 <div v-for="(banner, index) in banners" :key="index" class="slide">
                   <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
                 </div>

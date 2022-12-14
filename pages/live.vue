@@ -20,7 +20,7 @@
                 <video style="width: 100%;" class="height-55px" controls autoplay name="media"><source src="https://closeradio.tv/gamavision/player.htm" type="audio/mpeg"></video>
             </div>
 
-            <div>
+            <div  v-if="banners.length>0">
                 <agile autoplay :infinite="true" :autoplay-speed="4000">
                     <div v-for="(banner, index) in banners" :key="index" class="slide">
                     <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
