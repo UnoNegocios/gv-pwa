@@ -14,7 +14,7 @@
 
       <div class="grid grid-cols-2  md:grid-cols-3 mb-12 pb-12 gap-3">
           <div class="md:col-span-2 col-span-2 md:mr-12 md:pr-12">
-              <img class="ion-justify-content-start mb-2" :src="post.data[0].featured_media_path"/>
+              <img class="ion-justify-content-start mb-2" style="width:800px; height:auto;" :src="post.data[0].featured_media_path"/>
               <span style="font-size:16px;">Publicado el <strong>{{ post.data[0].date }}</strong></span> <!--por <strong>{{author}}</strong-->
 
               <div class="htmlcontent my-6" v-html="htmlContent(post.data[0])"></div>
