@@ -37,7 +37,7 @@
 export default {
   async asyncData({ params }) {
     function convertToJson(response){
-      if(response!=undefined){
+      if(response.headers.get('content-type')=='application/json'){
         return response.json()
       }else{
         return []
