@@ -3,7 +3,7 @@
     <NavBar/>
     <marquee style="background:black; padding:2px 30px 5px 30px;" class="top-space">
         <a :href="'/noticias/'+element.slug" v-for="(element, index) in posts.data" v-bind:key="index">
-          <span class="custom_chip">
+          <span class="custom_chip" v-if="element.categories!=undefined" >
               {{element.categories[0].name}}
           </span>
           <span class="custom_title">{{element.title}}</span>
@@ -19,7 +19,7 @@
               <a :href="'/noticias/'+post.slug">
                 <div :style="'background-size: cover!important; background-position:center; background-blend-mode: multiply; background-color: rgba(0,0,0,0.35); height: 54ch; width: 85.6ch; background-image: url(' + post.featured_media_path + ');'">
                   <div style="position:absolute; bottom:0px; padding:65px 50px; text-align:left; width: 100%;">
-                    <p style="font-size:15px;" class="my-2 text-zinc-100 rounded-lg">{{post.date}}<span style="font-size:12px;" class="ml-4 bg-indigo-600 text-zinc-50 font-semibold mr-2 px-2 py-0.5 rounded">{{ post.categories[0].name }}</span></p>
+                    <p style="font-size:15px;" class="my-2 text-zinc-100 rounded-lg">{{post.date}}<span style="font-size:12px;" class="ml-4 bg-indigo-600 text-zinc-50 font-semibold mr-2 px-2 py-0.5 rounded" v-if="post.categories!=undefined" >{{ post.categories[0].name }}</span></p>
                     <h2  class="my-2 text-zinc-50	rounded-lg letra-banner-celular" style="font-size:35px; line-height:40px;">{{post.title}}</h2>
                   </div>
                 </div>
@@ -43,7 +43,7 @@
           <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
             <a :href="'/noticias/'+post.slug" class="col-span-1 post-style" style="margin-bottom:15px!important;" v-for="(post, index) in posts.data.slice(5,7)" :key="index">
               <img :src="post.featured_media_path" />
-              <span style="font-size:12px; margin:15px 15px 0px 15px;" class="bg-indigo-600 text-zinc-50 font-semibold mr-2 px-2.5 py-0.5 rounded">{{ post.categories[0].name }}</span>
+              <span style="font-size:12px; margin:15px 15px 0px 15px;" class="bg-indigo-600 text-zinc-50 font-semibold mr-2 px-2.5 py-0.5 rounded" v-if="post.categories!=undefined">{{ post.categories[0].name }}</span>
 
               <p style="font-size:12px; padding:0px 15px;" class="mb-2 mt-1 text-gray-500 rounded-lg">{{post.date}}</p>
               <h4 style="line-height:19px; padding:0px 15px 15px 15px ; font-size:17px;">{{ post.title }}</h4>
@@ -70,7 +70,7 @@
             </button>
           </a>
         </div>
-        <div class="grid grid-cols-4 mb-12 pb-12 gap-4">
+        <div class="grid grid-cols-4 mb-12 pb-12 gap-4" v-if="p_c!=undefined" >
           <a class="col-span-2 md:col-span-1 post-style" v-if="p_c[0]!=undefined" :href="'/noticias/'+p_c[0].slug">
             <div class="height-160px" :style="'background-image:url(' + p_c[0].featured_media_path + '); background-repeat: no-repeat; background-size: cover;'"></div>
             <p style="font-size:12px; padding:5px 15px" class="mb-1 mt-1 text-gray-500 rounded-lg">{{p_c[0].date}}</p>
