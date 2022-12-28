@@ -12,7 +12,7 @@
         </div>
       </agile>
       
-      <div v-if="posts!=undefined && posts.data.length>0" class="grid grid-cols-4 mt-12 mb-12 gap-4">
+      <div v-if="posts!=undefined && posts.data!=undefined && posts.data.length>0" class="grid grid-cols-4 mt-12 mb-12 gap-4">
           <div v-for="(post, index) in posts.data" v-bind:key="index" class="text-align-center mb-4 mr-3 ml-3 md:col-span-1 col-span-2 post-style">
               <a :href="'/noticias/'+post.slug">
                   <div :style="'background-image:url(' + post.featured_media_path + '); background-repeat: no-repeat; background-size: cover; height:150px;'"></div>

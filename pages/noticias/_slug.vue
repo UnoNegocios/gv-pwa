@@ -1,6 +1,6 @@
 <template>
   <!--article-->  
-  <div v-if="post!=undefined">
+  <div v-if="post!=undefined&&post.data!=undefined">
     <NavBar/>
     
     <SocialHead
@@ -34,7 +34,7 @@
                   </a>
               </div>
           </div>
-          <div class="md:col-span-1 col-span-2" v-if="posts_by_category!=undefined && posts_by_category.data.length>0">
+          <div class="md:col-span-1 col-span-2" v-if="posts_by_category!=undefined && posts_by_category.data!=undefined && posts_by_category.data.length>0">
               <div class="pb-6 mt-6 md:mt-0">
                   <strong >Relacionado</strong>
               </div> 
@@ -53,7 +53,7 @@
                       </div>
                       
                   </a>
-                  <div v-if="index<posts_by_category.length-1" class="hidden justify-between mt-0 pt-0 pb-6 md:flex" style="border-top:1px solid #d1d5db;"></div>
+                  <div v-if="posts_by_category!=undefined && index<(posts_by_category.length-1)" class="hidden justify-between mt-0 pt-0 pb-6 md:flex" style="border-top:1px solid #d1d5db;"></div>
               </div>
 
               <agile v-if="banners!=undefined && banners.length>0" autoplay :infinite="true" :autoplay-speed="4000">
