@@ -81,6 +81,13 @@ export default {
         return []
       }
     };
+    function mapJson(post_data){
+      if(post_data!=undefined){
+        return post_data.data.map(a=>a.categories.map(b=>b.id)[0])[0]
+      }else{
+        return ''
+      }
+    };
     const post = await fetch(
       `https://gv.unocrm.mx/api/v1/news?filter[slug]=${params.slug}`
     ).then((res) => convertToJson(res))//.json())
@@ -89,7 +96,7 @@ export default {
       `https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Noticia&itemsPerPage=3`
     ).then((res) => convertToJson(res))//.json())
 
-    const category = post.data.map(a=>a.categories.map(b=>b.id)[0])[0]
+    const category = mapJson(post)
 
     const posts_by_category = await fetch(
       `https://gv.unocrm.mx/api/v1/news?filter[Categories.id]=`+ category + `&filter[visibility->web]&itemsPerPage=4`

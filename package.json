@@ -1,6 +1,6 @@
 {
   "name": "gv-pwa",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
