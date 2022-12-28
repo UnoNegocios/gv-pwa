@@ -183,7 +183,7 @@ export default {
         return 'px-4 md:order-2'
       }
     },
-    mapPbc(){
+    mapPbc(posts_by_categories){
       if(posts_by_categories!=undefined){
         return posts_by_categories.map(posts=>posts.data)
       }else{
