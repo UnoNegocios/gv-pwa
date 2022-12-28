@@ -52,7 +52,7 @@ export default {
     ).then((res) => convertToJson(res))//.json())
 
     const posts = await fetch(
-      `https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=${params.slug}&filter[visibility->web]`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
+      `https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=${params.slug}&filter[visibility->web]=true`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
     ).then((res) => convertToJson(res))//.json())
 
     return { banners2, banners, posts }

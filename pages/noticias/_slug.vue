@@ -109,7 +109,7 @@ export default {
     const category = mapJson(post)
 
     const posts_by_category = await fetch(
-      `https://gv.unocrm.mx/api/v1/news?filter[Categories.id]=`+ category + `&filter[visibility->web]&itemsPerPage=4`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
+      `https://gv.unocrm.mx/api/v1/news?filter[Categories.id]=`+ category + `&filter[visibility->web]=true&itemsPerPage=4`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
     ).then((res) => convertToJson(res))//.json())
 
     return { post, banners, posts_by_category }
