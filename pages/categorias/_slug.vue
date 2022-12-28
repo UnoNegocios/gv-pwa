@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+import axios from "axios"
 export default {
   async asyncData({ params }) {
     function convertToJson(response){
@@ -51,9 +52,14 @@ export default {
       `https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Categoría&itemsPerPage=3`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
     ).then((res) => convertToJson(res))//.json())
 
-    const posts = await fetch(
-      `https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=${params.slug}&filter[visibility->web]=true`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
-    ).then((res) => convertToJson(res))//.json())
+    
+      
+      const posts = await axios.get(
+        `https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=${params.slug}&filter[visibility->web]=true`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
+      ).then(res=>{
+        return res.data
+      })
+    
 
     return { banners2, banners, posts }
   },
