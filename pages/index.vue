@@ -110,6 +110,7 @@ export default {
   name: 'IndexPage',
   async asyncData() {
     function convertToJson(response){
+      console.log(response)
       if(response!=undefined){
         return response.json()
       }else{
