@@ -35,8 +35,15 @@
 <script>
 export default {
     async asyncData() {
+        function convertToJson(response){
+            if(response!=undefined){
+                return response.json()
+            }else{
+                return []
+            }
+        };
         const banners = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=En Vivo&itemsPerPage=3').then((response) =>
-            response.json()
+            convertToJson(response)//.json()
         );
         return {banners}
     },

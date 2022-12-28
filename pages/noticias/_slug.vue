@@ -74,19 +74,26 @@
 <script>
 export default {
   async asyncData({ params }) {
+    function convertToJson(response){
+      if(response!=undefined){
+        return response.json()
+      }else{
+        return []
+      }
+    };
     const post = await fetch(
       `https://gv.unocrm.mx/api/v1/news?filter[slug]=${params.slug}`
-    ).then((res) => res.json())
+    ).then((res) => convertToJson(res))//.json())
 
     const banners = await fetch(
       `https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Noticia&itemsPerPage=3`
-    ).then((res) => res.json())
+    ).then((res) => convertToJson(res))//.json())
 
     const category = post.data.map(a=>a.categories.map(b=>b.id)[0])[0]
 
     const posts_by_category = await fetch(
       `https://gv.unocrm.mx/api/v1/news?filter[Categories.id]=`+ category + `&filter[visibility->web]&itemsPerPage=4`
-    ).then((res) => res.json())
+    ).then((res) => convertToJson(res))//.json())
 
     return { post, banners, posts_by_category }
   },

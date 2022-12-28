@@ -36,18 +36,24 @@
 <script>
 export default {
   async asyncData({ params }) {
-
+    function convertToJson(response){
+      if(response!=undefined){
+        return response.json()
+      }else{
+        return []
+      }
+    };
     const banners = await fetch(
       `https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Categoría&itemsPerPage=3`
-    ).then((res) => res.json())
+    ).then((res) => convertToJson(res))//.json())
 
     const banners2 = await fetch(
       `https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Categoría&itemsPerPage=3`
-    ).then((res) => res.json())
+    ).then((res) => convertToJson(res))//.json())
 
     const posts = await fetch(
       `https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=${params.slug}&filter[visibility->web]`
-    ).then((res) => res.json())
+    ).then((res) => convertToJson(res))//.json())
 
     return { banners2, banners, posts }
   },

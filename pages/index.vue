@@ -109,32 +109,39 @@
 export default {
   name: 'IndexPage',
   async asyncData() {
+    function convertToJson(response){
+      if(response!=undefined){
+        return response.json()
+      }else{
+        return []
+      }
+    };
     const banners = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3')
     .then((response) =>
-      response.json()
+      convertToJson(response)//.json()
     );
 
     const banners2 = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3')
     .then((response) =>
-      response.json()
+      convertToJson(response)//.json()
     );
 
 
     const posts = await fetch('https://gv.unocrm.mx/api/v1/news?filter[visibility->web]=true&itemsPerPage=7')
     .then((response) =>
-      response.json()
+      convertToJson(response)//.json()
     );
 
     const categories = await fetch('https://gv.unocrm.mx/api/v1/news/categories')
     .then((response) =>
-      response.json()
+      convertToJson(response)//.json()
     );
 
     var posts_by_categories = []
     for(var i=0; i<categories.length; i++){
       posts_by_categories[i] = await fetch('https://gv.unocrm.mx/api/v1/news?filter[Categories.id]='+categories[i].id+'&filter[visibility->web]=true')
       .then((response) =>
-        response.json()
+        convertToJson(response)//.json()
       );
     }
 
