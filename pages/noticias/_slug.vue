@@ -81,9 +81,19 @@ export default {
         return []
       }
     };
+    function mapCategories(categories){
+      if(categories!=undefined){
+        return categories.map(b=>b.id)
+      }else{
+        return []
+      }
+    }
     function mapJson(post_data){
+      console.log(post_data)
       if(post_data!=undefined){
-        return post_data.data.map(a=>a.categories.map(b=>b.id)[0])[0]
+        if(post_data.data!=undefined){
+          return post_data.data.map(a=>mapCategories(a.categories)[0])[0]
+        }
       }else{
         return ''
       }

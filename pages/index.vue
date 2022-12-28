@@ -60,7 +60,7 @@
       </agile>
 
       
-      <div v-for="(p_c, index) in mapPbc(posts_by_categorie)" v-bind:key="index">
+      <div v-for="(p_c, index) in mapPbc(posts_by_categories)" v-bind:key="index">
         <div class="flex justify-between mt-12 pt-2 pb-3" style="border-top:2px solid #d1d5db;">
           <h3 style="margin-top: -31px; height: 40px; text-transform: uppercase; font-size:24px; font-weight:500;" class="bg-indigo-600 text-zinc-50 font-semibold mr-2 px-8 py-0.5 rounded">{{categories[index].name}}</h3>
           <a :href="'/categorias/' + categories[index].name">
@@ -184,21 +184,21 @@ export default {
       }
     },
     mapPbc(posts_by_categories){
+      var perro = []
       if(posts_by_categories!=undefined){
-        return posts_by_categories.map(posts=>posts.data)
-      }else{
-        return []
+        perro = posts_by_categories.map(posts=>posts.data)
       }
+      return perro
     },
     mapCategories(categories){
+      var perro = []
       if(categories!=undefined){
-        return categories.map(id=>{return{
+        perro = categories.map(id=>{return{
           name:id.name,
           id:id.id
         }})
-      }else{
-        return []
       }
+      return perro 
     }
   }
 }
