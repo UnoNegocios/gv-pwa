@@ -42,7 +42,7 @@ export default {
                 return []
             }
         };
-        const banners = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=En Vivo&itemsPerPage=3').then((response) =>
+        const banners = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=En Vivo&itemsPerPage=3',{ method: 'GET', headers: {'Content-Type': 'application/json'}}).then((response) =>
             convertToJson(response)//.json()
         );
         return {banners}

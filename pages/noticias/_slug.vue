@@ -99,17 +99,17 @@ export default {
       }
     };
     const post = await fetch(
-      `https://gv.unocrm.mx/api/v1/news?filter[slug]=${params.slug}`
+      `https://gv.unocrm.mx/api/v1/news?filter[slug]=${params.slug}`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
     ).then((res) => convertToJson(res))//.json())
 
     const banners = await fetch(
-      `https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Noticia&itemsPerPage=3`
+      `https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Noticia&itemsPerPage=3`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
     ).then((res) => convertToJson(res))//.json())
 
     const category = mapJson(post)
 
     const posts_by_category = await fetch(
-      `https://gv.unocrm.mx/api/v1/news?filter[Categories.id]=`+ category + `&filter[visibility->web]&itemsPerPage=4`
+      `https://gv.unocrm.mx/api/v1/news?filter[Categories.id]=`+ category + `&filter[visibility->web]&itemsPerPage=4`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
     ).then((res) => convertToJson(res))//.json())
 
     return { post, banners, posts_by_category }
@@ -122,7 +122,7 @@ export default {
       return this.$router.go(-1)
     },
     clicAd(ad){
-      fetch('https://gv.unocrm.mx/api/v1/click_ad/' + ad.id).then(response =>{
+      fetch('https://gv.unocrm.mx/api/v1/click_ad/' + ad.id,{ method: 'GET', headers: {'Content-Type': 'application/json'}}).then(response =>{
         window.open(ad.url, '_blank');
       });
     },

@@ -118,23 +118,23 @@ export default {
         return []
       }
     };
-    const banners = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3')
+    const banners = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3',{ method: 'GET', headers: {'Content-Type': 'application/json'}})
     .then((response) =>
       convertToJson(response)//.json()
     );
 
-    const banners2 = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3')
+    const banners2 = await fetch('https://gv.unocrm.mx/api/v1/display_ad?filter[is_in_time]=true&filter[is_in_hour]=true&filter[position]=Inicio&itemsPerPage=3',{ method: 'GET', headers: {'Content-Type': 'application/json'}})
     .then((response) =>
       convertToJson(response)//.json()
     );
 
 
-    const posts = await fetch('https://gv.unocrm.mx/api/v1/news?filter[visibility->web]=true&itemsPerPage=7')
+    const posts = await fetch('https://gv.unocrm.mx/api/v1/news?filter[visibility->web]=true&itemsPerPage=7',{ method: 'GET', headers: {'Content-Type': 'application/json'}})
     .then((response) =>
       convertToJson(response)//.json()
     );
 
-    const categories = await fetch('https://gv.unocrm.mx/api/v1/news/categories')
+    const categories = await fetch('https://gv.unocrm.mx/api/v1/news/categories',{ method: 'GET', headers: {'Content-Type': 'application/json'}})
     .then((response) =>
       convertToJson(response)//.json()
     );
@@ -142,7 +142,7 @@ export default {
     var posts_by_categories = []
     if(categories!=undefined){
       for(var i=0; i<categories.length; i++){
-        posts_by_categories[i] = await fetch('https://gv.unocrm.mx/api/v1/news?filter[Categories.id]='+categories[i].id+'&filter[visibility->web]=true')
+        posts_by_categories[i] = await fetch('https://gv.unocrm.mx/api/v1/news?filter[Categories.id]='+categories[i].id+'&filter[visibility->web]=true',{ method: 'GET', headers: {'Content-Type': 'application/json'}})
         .then((response) =>
           convertToJson(response)//.json()
         );
