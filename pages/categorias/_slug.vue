@@ -54,11 +54,11 @@ export default {
 
     
       
-      const posts = await axios.get(
-        `https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=${params.slug}&filter[visibility->web]=true`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
-      ).then(res=>{
-        return res.data
-      })
+    const posts = await axios.get(
+      `https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=${params.slug}&filter[visibility->web]=true`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
+    ).then(res=>{
+      return res.data
+    })
     
 
     return { banners2, banners, posts }
