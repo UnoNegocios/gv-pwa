@@ -1,5 +1,5 @@
 <template>
-  <div v-if="posts!=undefined && categories!=undefined && posts_by_categories!=undefined && posts.data.length>0 && categories.length>0 && posts_by_categories.length>0 ">
+  <div v-if="posts!=undefined && categories!=undefined && posts_by_categories!=undefined && posts.data!=undefined && posts.data.length>0 && categories.length>0 && posts_by_categories.length>0 ">
     <NavBar/>
     <marquee style="background:black; padding:2px 30px 5px 30px;" class="top-space">
         <a :href="'/noticias/'+element.slug" v-for="(element, index) in posts.data" v-bind:key="index">
@@ -140,11 +140,13 @@ export default {
     );
 
     var posts_by_categories = []
-    for(var i=0; i<categories.length; i++){
-      posts_by_categories[i] = await fetch('https://gv.unocrm.mx/api/v1/news?filter[Categories.id]='+categories[i].id+'&filter[visibility->web]=true')
-      .then((response) =>
-        convertToJson(response)//.json()
-      );
+    if(categories!=undefined){
+      for(var i=0; i<categories.length; i++){
+        posts_by_categories[i] = await fetch('https://gv.unocrm.mx/api/v1/news?filter[Categories.id]='+categories[i].id+'&filter[visibility->web]=true')
+        .then((response) =>
+          convertToJson(response)//.json()
+        );
+      }
     }
 
     return {banners, banners2, posts, categories, posts_by_categories}
