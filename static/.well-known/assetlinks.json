@@ -1,0 +1,12 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target" : { 
+            "namespace": "android_app", 
+            "package_name": "com.gamavision.app",
+            "sha256_cert_fingerprints": ["0D:A9:72:D4:A3:75:F0:F2:E7:77:77:70:24:76:44:2C:BB:CE:F8:FC:74:12:B4:24:96:D5:45:77:14:00:DA:12"] 
+        }
+    }
+]
