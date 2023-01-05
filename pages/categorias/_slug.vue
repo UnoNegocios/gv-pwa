@@ -22,12 +22,31 @@
               </a>
           </div>
       </div>
-        
+
+      <div class="flex flex-col items-center">
+        <!-- Help text -->
+        <span class="text-sm text-gray-700">
+            Página <span class="font-semibold text-gray-900">{{current_page}}</span> de <span class="font-semibold text-gray-900">{{(total_posts/15).toFixed(0)}}</span> de <span class="font-semibold text-gray-900">{{total_posts}}</span> Noticias
+        </span>
+        <div class="inline-flex mt-2 xs:mt-0">
+          <!-- Buttons -->
+          <button v-if="current_page>1" class="inline-flex items-center px-4 py-2 text-sm font-medium" @click="current_page = current_page - 1">
+              <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+              Anterior
+          </button>
+          <button v-if="current_page<(total_posts/15).toFixed(0)" class="inline-flex items-center px-4 py-2 text-sm font-medium" @click="current_page = current_page + 1">
+              Siguiente
+              <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+
       <agile v-if="banners2!=undefined && banners2.length>0" autoplay :infinite="true" :autoplay-speed="4000">
         <div v-for="(banner, index) in banners2" :key="index" class="slide">
           <img style="cursor: pointer;" @click="clicAd(banner)" :src="banner.image_url"/>
         </div>
       </agile>
+      
 
     </div>
     <Footer/>
@@ -36,6 +55,24 @@
 <script>
 import axios from "axios"
 export default {
+  data(){
+    return{
+      posts:[],
+      current_page:1
+    }
+  },
+  watch:{
+    current_page:{
+      handler(){
+        this.getPosts()
+      }, deep:true
+    },
+    categoryName:{
+      handler(){
+        this.getPosts()
+      }, deep:true
+    }
+  },
   async asyncData({ params }) {
     function convertToJson(response){
       if(response.headers.get('content-type')=='application/json'){
@@ -54,16 +91,26 @@ export default {
 
     
       
-    const posts = await axios.get(
+    /*const posts = await axios.get(
       `https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=${params.slug}&filter[visibility->web]=true`,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
     ).then(res=>{
       return res.data
-    })
+    })*/
     
 
-    return { banners2, banners, posts }
+    return { banners2, banners } //posts
+  },
+  created(){
+    this.getPosts()
   },
   methods: {
+    getPosts(){
+      axios.get('https://gv.unocrm.mx/api/v1/news?filter[Categories.name]=' + this.categoryName + '&filter[visibility->web]=true&page=' + this.current_page,{ method: 'GET', headers: {'Content-Type': 'application/json'}}
+      ).then(res=>{
+        this.posts = res.data
+        this.total_posts = res.data.meta.total
+      })
+    },
     clicAd(ad){
       fetch('https://gv.unocrm.mx/api/v1/click_ad/').then(response =>{
         window.open(ad.url, '_blank');
