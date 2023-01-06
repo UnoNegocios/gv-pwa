@@ -116,7 +116,14 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    // https://github.com/nuxt-community/gtm-module
+    '@nuxtjs/gtm',
   ],
+
+  // GTM module configuration: https://github.com/nuxt-community/gtm-module
+  gtm: {
+    id: 'G-W7ENEX0YJX'
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
